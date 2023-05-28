@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-     {% load static %}
+    {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
+    <title>OnlineCourse App With Django</title>
 </head>
 
 <body>
@@ -14,7 +16,7 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <div class="navbar-header">
-                  <a class="navbar-brand" href="{% url 'onlinecourse:index' %}">Home</a>
+                <a class="navbar-brand" href="{% url 'onlinecourse:index' %}">Home</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
@@ -27,10 +29,10 @@
                     <form class="form-inline" action="{% url 'onlinecourse:login' %}" method="post">
                         {% csrf_token %}
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Username" name="username" >
-                            <input type="password" class="form-control" placeholder="Username" name="psw" >
-                            <button class="btn btn-primary" type="submit">Login</button>
-                            <a class="btn btn-link" href="{% url 'onlinecourse:registration' %}">Sign Up</a>
+                            <input type="text" class="form-control" placeholder="Username" name="username">&nbsp;
+                            <input type="password" class="form-control" placeholder="Password" name="psw">&nbsp;
+                            <button class="btn btn-primary" type="submit">Login</button>&nbsp;
+                            <a class="btn btn-outline-primary" href="{% url 'onlinecourse:registration' %}">Sign Up</a>
                         </div>
                     </form>
                 </li>
@@ -40,7 +42,7 @@
     </nav>
 
     <!-- Page content -->
-     <div class="container-fluid">
+    <div class="container-fluid">
         <h2>{{ course.name }}</h2>
         <div class="card-columns-vertical">
             {% for lesson in course.lesson_set.all %}
@@ -67,7 +69,7 @@
             <!-- A choice submission form example-->
             <div id='exam_{{lesson.id}}' class="collapse">
                 <h4> Please choose the correct answer with multi selection</h4>
-                <form id="questionform" action="point to a submit view" method="post">
+                <form id="questionform" action="{% url 'onlinecourse:submit' course.id lesson.id %}" method="post">
                     <!-- for each question in the course -->
                     {% for question in lesson.question_set.all %}
                     <div class="card mt-1">
@@ -96,4 +98,6 @@
         </div>
     </div>
 </body>
+
 </html>
+<!--See more details Bootstrap checkbox -->
