@@ -74,7 +74,7 @@
                     {% for question in lesson.question_set.all %}
                     <div class="card mt-1">
                         <div class="card-header">
-                            <h5>{{ question.question_text}}</h5>
+                            <h5>{{ question.context}}</h5>
                         </div>
                         {% csrf_token %}
                         <div class="form-group">
